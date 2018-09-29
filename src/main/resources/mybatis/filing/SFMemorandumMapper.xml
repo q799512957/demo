@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.activiti.demo.filing.mapper.SFMemorandumMapper" >
+  <resultMap id="BaseResultMap" type="com.activiti.demo.filing.entity.SFMemorandum" >
+    <id column="FM_ID" property="fmId" jdbcType="VARCHAR" />
+    <result column="FILE_NO" property="fileNo" jdbcType="VARCHAR" />
+    <result column="FILING_NO" property="filingNo" jdbcType="VARCHAR" />
+    <result column="PRESERVATION_PERIOD" property="preservationPeriod" jdbcType="VARCHAR" />
+    <result column="FILLING_PERSON" property="fillingPerson" jdbcType="VARCHAR" />
+    <result column="CHECKER" property="checker" jdbcType="VARCHAR" />
+    <result column="FILLING_TIME" property="fillingTime" jdbcType="DATE" />
+    <result column="CASE_INFO_ID" property="caseInfoId" jdbcType="VARCHAR" />
+    <result column="FILE_DESCRIPTION" property="fileDescription" jdbcType="CLOB" />
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
+  </resultMap>
+  <insert id="insert" parameterType="com.activiti.demo.filing.entity.SFMemorandum">
+     insert into STG_FILE_MEMORANDUM (FM_ID, FILE_NO, FILING_NO,
+      PRESERVATION_PERIOD, FILLING_PERSON, CHECKER,
+      FILLING_TIME, CASE_INFO_ID, FILE_DESCRIPTION,
+      CONTENT)
+    values (#{fmId,jdbcType=VARCHAR}, #{fileNo,jdbcType=VARCHAR}, #{filingNo,jdbcType=VARCHAR},
+      #{preservationPeriod,jdbcType=VARCHAR}, #{fillingPerson,jdbcType=VARCHAR}, #{checker,jdbcType=VARCHAR},
+      #{fillingTime,jdbcType=DATE}, #{caseInfoId,jdbcType=VARCHAR}, #{fileDescription,jdbcType=CLOB},
+      #{content,jdbcType=CLOB})
+  </insert>
+  <select id="getList" resultMap="BaseResultMap">
+        select * from STG_FILE_MEMORANDUM where CASE_INFO_ID=#{caseInfoId}
+    </select>
+  <update id="update" parameterType="com.activiti.demo.filing.entity.SFMemorandum">
+    update STG_FILE_MEMORANDUM
+    set FILE_NO = #{fileNo,jdbcType=VARCHAR},
+      FILING_NO = #{filingNo,jdbcType=VARCHAR},
+      PRESERVATION_PERIOD = #{preservationPeriod,jdbcType=VARCHAR},
+      FILLING_PERSON = #{fillingPerson,jdbcType=VARCHAR},
+      CHECKER = #{checker,jdbcType=VARCHAR},
+      FILLING_TIME = #{fillingTime,jdbcType=DATE},
+      CASE_INFO_ID = #{caseInfoId,jdbcType=VARCHAR},
+      FILE_DESCRIPTION = #{fileDescription,jdbcType=CLOB},
+      CONTENT = #{content,jdbcType=CLOB}
+    where FM_ID = #{fmId,jdbcType=VARCHAR}
+    </update>
+</mapper>

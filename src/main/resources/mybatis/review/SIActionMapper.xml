@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.activiti.demo.review.mapper.SIActionMapper" >
+  <resultMap id="BaseResultMap" type="com.activiti.demo.review.entity.SIAction" >
+    <id column="IAN_ID" property="ianId" jdbcType="VARCHAR" />
+    <result column="AMOUNT" property="amount" jdbcType="DECIMAL" />
+    <result column="INFORM_DEFENCE_RIGHT" property="informDefenceRight" jdbcType="DECIMAL" />
+    <result column="INFORM_HEAR_RIGHT" property="informHearRight" jdbcType="DECIMAL" />
+    <result column="CASE_INFO_ID" property="caseInfoId" jdbcType="VARCHAR" />
+    <result column="REGULATION_VIOLATED" property="regulationViolated" jdbcType="CLOB" />
+    <result column="BASIS" property="basis" jdbcType="CLOB" />
+    <result column="DECISION" property="decision" jdbcType="CLOB" />
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
+  </resultMap>
+  <insert id="insert" parameterType="com.activiti.demo.review.entity.SIAction">
+     insert into STG_ILLEGAL_ACTION (IAN_ID, AMOUNT, INFORM_DEFENCE_RIGHT,
+      INFORM_HEAR_RIGHT, CASE_INFO_ID, REGULATION_VIOLATED,
+      BASIS, DECISION, CONTENT)
+    values (#{ianId,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{informDefenceRight,jdbcType=DECIMAL},
+      #{informHearRight,jdbcType=DECIMAL}, #{caseInfoId,jdbcType=VARCHAR}, #{regulationViolated,jdbcType=CLOB},
+      #{basis,jdbcType=CLOB}, #{decision,jdbcType=CLOB}, #{content,jdbcType=CLOB})
+  </insert>
+  <select id="getList" resultMap="BaseResultMap">
+        select * from STG_ILLEGAL_ACTION where CASE_INFO_ID = #{caseInfoId,jdbcType=VARCHAR}
+    </select>
+  <update id="update" parameterType="com.activiti.demo.review.entity.SIAction">
+    update STG_ILLEGAL_ACTION
+    set AMOUNT = #{amount,jdbcType=DECIMAL},
+      INFORM_DEFENCE_RIGHT = #{informDefenceRight,jdbcType=DECIMAL},
+      INFORM_HEAR_RIGHT = #{informHearRight,jdbcType=DECIMAL},
+      CASE_INFO_ID = #{caseInfoId,jdbcType=VARCHAR},
+      REGULATION_VIOLATED = #{regulationViolated,jdbcType=CLOB},
+      BASIS = #{basis,jdbcType=CLOB},
+      DECISION = #{decision,jdbcType=CLOB},
+      CONTENT = #{content,jdbcType=CLOB}
+    where IAN_ID = #{ianId,jdbcType=VARCHAR}
+    </update>
+</mapper>

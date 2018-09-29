@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.activiti.demo.filing.mapper.SFMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.activiti.demo.filing.entity.SFMenu" >
+    <id column="FM_ID" property="fmId" jdbcType="VARCHAR" />
+    <result column="FILE_NO" property="fileNo" jdbcType="VARCHAR" />
+    <result column="FUKE_DATE" property="fukeDate" jdbcType="DATE" />
+    <result column="FILE_TITLE" property="fileTitle" jdbcType="VARCHAR" />
+    <result column="PAGE_NUM" property="pageNum" jdbcType="DECIMAL" />
+    <result column="CASE_INFO_ID" property="caseInfoId" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
+  </resultMap>
+  <insert id="insert" parameterType="com.activiti.demo.filing.entity.SFMenu">
+     insert into STG_FILE_MENU (FM_ID, FILE_NO, FUKE_DATE,
+      FILE_TITLE, PAGE_NUM, CASE_INFO_ID,
+      CONTENT)
+    values (#{fmId,jdbcType=VARCHAR}, #{fileNo,jdbcType=VARCHAR}, #{fukeDate,jdbcType=DATE},
+      #{fileTitle,jdbcType=VARCHAR}, #{pageNum,jdbcType=DECIMAL}, #{caseInfoId,jdbcType=VARCHAR},
+      #{content,jdbcType=CLOB})
+  </insert>
+  <select id="getList" resultMap="BaseResultMap">
+        select * from STG_FILE_MENU where CASE_INFO_ID=#{caseInfoId}
+    </select>
+  <update id="update" parameterType="com.activiti.demo.filing.entity.SFMenu">
+    update STG_FILE_MENU
+    set FILE_NO = #{fileNo,jdbcType=VARCHAR},
+      FUKE_DATE = #{fukeDate,jdbcType=DATE},
+      FILE_TITLE = #{fileTitle,jdbcType=VARCHAR},
+      PAGE_NUM = #{pageNum,jdbcType=DECIMAL},
+      CASE_INFO_ID = #{caseInfoId,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=CLOB}
+    where FM_ID = #{fmId,jdbcType=VARCHAR}
+    </update>
+</mapper>

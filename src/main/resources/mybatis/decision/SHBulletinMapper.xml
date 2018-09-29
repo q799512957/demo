@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.activiti.demo.decision.mapper.SHBulletinMapper" >
+  <resultMap id="BaseResultMap" type="com.activiti.demo.decision.entity.SHBulletin" >
+    <id column="HB_ID" property="hbId" jdbcType="VARCHAR" />
+    <result column="APPLICATION_DATE" property="applicationDate" jdbcType="DATE" />
+    <result column="ORGANIZATION" property="organization" jdbcType="VARCHAR" />
+    <result column="SIGN_UP_START_TIME" property="signUpStartTime" jdbcType="DATE" />
+    <result column="SIGN_UP_END_TIME" property="signUpEndTime" jdbcType="DATE" />
+    <result column="SIGN_UP_LOCATION" property="signUpLocation" jdbcType="VARCHAR" />
+    <result column="ANNOUNCEMENT_DATE" property="announcementDate" jdbcType="DATE" />
+    <result column="CASE_INFO_ID" property="caseInfoId" jdbcType="VARCHAR" />
+    <result column="SUPPORT_MATERIA" property="supportMateria" jdbcType="CLOB" />
+    <result column="ATTEND_QUALIFICATION" property="attendQualification" jdbcType="CLOB" />
+    <result column="ATTENTION" property="attention" jdbcType="CLOB" />
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
+  </resultMap>
+  <insert id="insert" parameterType="com.activiti.demo.decision.entity.SHBulletin">
+     insert into STG_HEARING_BULLETIN (HB_ID, APPLICATION_DATE, ORGANIZATION,
+      SIGN_UP_START_TIME, SIGN_UP_END_TIME, SIGN_UP_LOCATION,
+      ANNOUNCEMENT_DATE, CASE_INFO_ID, SUPPORT_MATERIA,
+      ATTEND_QUALIFICATION, ATTENTION, CONTENT
+      )
+    values (#{hbId,jdbcType=VARCHAR}, #{applicationDate,jdbcType=DATE}, #{organization,jdbcType=VARCHAR},
+      #{signUpStartTime,jdbcType=DATE}, #{signUpEndTime,jdbcType=DATE}, #{signUpLocation,jdbcType=VARCHAR},
+      #{announcementDate,jdbcType=DATE}, #{caseInfoId,jdbcType=VARCHAR}, #{supportMateria,jdbcType=CLOB},
+      #{attendQualification,jdbcType=CLOB}, #{attention,jdbcType=CLOB}, #{content,jdbcType=CLOB}
+      )
+  </insert>
+  <select id="getList" resultMap="BaseResultMap">
+        select * from STG_HEARING_BULLETIN where CASE_INFO_ID=#{caseInfoId}
+    </select>
+  <update id="update" parameterType="com.activiti.demo.decision.entity.SHBulletin">
+    update STG_HEARING_BULLETIN
+    set APPLICATION_DATE = #{applicationDate,jdbcType=DATE},
+      ORGANIZATION = #{organization,jdbcType=VARCHAR},
+      SIGN_UP_START_TIME = #{signUpStartTime,jdbcType=DATE},
+      SIGN_UP_END_TIME = #{signUpEndTime,jdbcType=DATE},
+      SIGN_UP_LOCATION = #{signUpLocation,jdbcType=VARCHAR},
+      ANNOUNCEMENT_DATE = #{announcementDate,jdbcType=DATE},
+      CASE_INFO_ID = #{caseInfoId,jdbcType=VARCHAR},
+      SUPPORT_MATERIA = #{supportMateria,jdbcType=CLOB},
+      ATTEND_QUALIFICATION = #{attendQualification,jdbcType=CLOB},
+      ATTENTION = #{attention,jdbcType=CLOB},
+      CONTENT = #{content,jdbcType=CLOB}
+    where HB_ID = #{hbId,jdbcType=VARCHAR}
+    </update>
+</mapper>

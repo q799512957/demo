@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.activiti.demo.filing.mapper.SCApprovalMapper" >
+  <resultMap id="BaseResultMap" type="com.activiti.demo.filing.entity.SCApproval" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="OFFICER" property="officer" jdbcType="VARCHAR" />
+    <result column="ORGANIZATION" property="organization" jdbcType="VARCHAR" />
+    <result column="TIME" property="time" jdbcType="DATE" />
+    <result column="FILE_ID" property="fileId" jdbcType="VARCHAR" />
+    <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
+    <result column="SUGGESTION" property="suggestion" jdbcType="CLOB" />
+  </resultMap>
+  <insert id="insert" parameterType="com.activiti.demo.filing.entity.SFMemorandum">
+    insert into STG_CASE_APPROVAL (ID, OFFICER, ORGANIZATION,
+      TIME, FILE_ID, ROLE_NAME,
+      SUGGESTION)
+    values (#{id,jdbcType=VARCHAR}, #{officer,jdbcType=VARCHAR}, #{organization,jdbcType=VARCHAR},
+      #{time,jdbcType=DATE}, #{fileId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR},
+      #{suggestion,jdbcType=CLOB})
+  </insert>
+  <select id="getList" resultMap="BaseResultMap">
+        select * from STG_CASE_APPROVAL where id=#{caseInfoId}
+    </select>
+  <update id="update" parameterType="com.activiti.demo.filing.entity.SFMemorandum">
+    update STG_CASE_APPROVAL
+    set OFFICER = #{officer,jdbcType=VARCHAR},
+      ORGANIZATION = #{organization,jdbcType=VARCHAR},
+      TIME = #{time,jdbcType=DATE},
+      FILE_ID = #{fileId,jdbcType=VARCHAR},
+      ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      SUGGESTION = #{suggestion,jdbcType=CLOB}
+    where ID = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

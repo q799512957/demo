@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.activiti.demo.execution.mapper.SEApplicationMapper" >
+  <resultMap id="BaseResultMap" type="com.activiti.demo.execution.entity.SEApplication" >
+    <id column="EA_ID" property="eaId" jdbcType="VARCHAR" />
+    <result column="COURT" property="court" jdbcType="VARCHAR" />
+    <result column="ASK_PERSON" property="askPerson" jdbcType="VARCHAR" />
+    <result column="CASE_INFO_ID" property="caseInfoId" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
+    <result column="CONTENT2" property="content2" jdbcType="CLOB" />
+  </resultMap>
+  <insert id="insert" parameterType="com.activiti.demo.execution.entity.SEApplication">
+     insert into STG_ENFORCEMENT_APPLICATION (EA_ID, COURT, ASK_PERSON,
+      CASE_INFO_ID, CONTENT, CONTENT2
+      )
+    values (#{eaId,jdbcType=VARCHAR}, #{court,jdbcType=VARCHAR}, #{askPerson,jdbcType=VARCHAR},
+      #{caseInfoId,jdbcType=VARCHAR}, #{content,jdbcType=CLOB}, #{content2,jdbcType=CLOB}
+      )
+  </insert>
+  <select id="getList" resultMap="BaseResultMap">
+        select * from STG_ENFORCEMENT_APPLICATION where CASE_INFO_ID=#{caseInfoId}
+    </select>
+  <update id="update" parameterType="com.activiti.demo.execution.entity.SEApplication">
+    update STG_ENFORCEMENT_APPLICATION
+    set COURT = #{court,jdbcType=VARCHAR},
+      ASK_PERSON = #{askPerson,jdbcType=VARCHAR},
+      CASE_INFO_ID = #{caseInfoId,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=CLOB},
+      CONTENT2 = #{content2,jdbcType=CLOB}
+    where EA_ID = #{eaId,jdbcType=VARCHAR}
+    </update>
+</mapper>

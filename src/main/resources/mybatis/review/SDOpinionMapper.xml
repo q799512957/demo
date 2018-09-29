@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.activiti.demo.review.mapper.SDOpinionMapper" >
+  <resultMap id="BaseResultMap" type="com.activiti.demo.review.entity.SDOpinion" >
+    <id column="CDO_ID" property="cdoId" jdbcType="VARCHAR" />
+    <result column="INVESTIGATE_RESULT" property="investigateResult" jdbcType="VARCHAR" />
+    <result column="ENFORCER_SIGN_DATE" property="enforcerSignDate" jdbcType="DATE" />
+    <result column="LEGAL_ORG_SIGN_DATE" property="legalOrgSignDate" jdbcType="DATE" />
+    <result column="ENFORCE_ORG_SIGN_DATE" property="enforceOrgSignDate" jdbcType="DATE" />
+    <result column="CASE_INFO_ID" property="caseInfoId" jdbcType="VARCHAR" />
+    <result column="PROCESS" property="process" jdbcType="CLOB" />
+    <result column="DISPOSAL_SUGGESTION" property="disposalSuggestion" jdbcType="CLOB" />
+    <result column="LEGAL_ORG_OP" property="legalOrgOp" jdbcType="CLOB" />
+    <result column="ENFORCE_ORG_OP" property="enforceOrgOp" jdbcType="CLOB" />
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
+  </resultMap>
+  <insert id="insert" parameterType="com.activiti.demo.review.entity.SDOpinion">
+    insert into STG_DISPOSAL_OPINION (CDO_ID, INVESTIGATE_RESULT, ENFORCER_SIGN_DATE,
+      LEGAL_ORG_SIGN_DATE, ENFORCE_ORG_SIGN_DATE, CASE_INFO_ID,
+      PROCESS, DISPOSAL_SUGGESTION, LEGAL_ORG_OP,
+      ENFORCE_ORG_OP, CONTENT)
+    values (#{cdoId,jdbcType=VARCHAR}, #{investigateResult,jdbcType=VARCHAR}, #{enforcerSignDate,jdbcType=DATE},
+      #{legalOrgSignDate,jdbcType=DATE}, #{enforceOrgSignDate,jdbcType=DATE}, #{caseInfoId,jdbcType=VARCHAR},
+      #{process,jdbcType=CLOB}, #{disposalSuggestion,jdbcType=CLOB}, #{legalOrgOp,jdbcType=CLOB},
+      #{enforceOrgOp,jdbcType=CLOB}, #{content,jdbcType=CLOB})
+  </insert>
+  <select id="getList" resultMap="BaseResultMap">
+        select * from STG_DISPOSAL_OPINION where CASE_INFO_ID = #{caseInfoId,jdbcType=VARCHAR}
+    </select>
+  <update id="update" parameterType="com.activiti.demo.review.entity.SDOpinion">
+    update STG_DISPOSAL_OPINION
+    set INVESTIGATE_RESULT = #{investigateResult,jdbcType=VARCHAR},
+      ENFORCER_SIGN_DATE = #{enforcerSignDate,jdbcType=DATE},
+      LEGAL_ORG_SIGN_DATE = #{legalOrgSignDate,jdbcType=DATE},
+      ENFORCE_ORG_SIGN_DATE = #{enforceOrgSignDate,jdbcType=DATE},
+      CASE_INFO_ID = #{caseInfoId,jdbcType=VARCHAR},
+      PROCESS = #{process,jdbcType=CLOB},
+      DISPOSAL_SUGGESTION = #{disposalSuggestion,jdbcType=CLOB},
+      LEGAL_ORG_OP = #{legalOrgOp,jdbcType=CLOB},
+      ENFORCE_ORG_OP = #{enforceOrgOp,jdbcType=CLOB},
+      CONTENT = #{content,jdbcType=CLOB}
+    where CDO_ID = #{cdoId,jdbcType=VARCHAR}
+    </update>
+</mapper>

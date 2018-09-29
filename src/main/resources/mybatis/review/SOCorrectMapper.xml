@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.activiti.demo.review.mapper.SOCorrectMapper" >
+  <resultMap id="BaseResultMap" type="com.activiti.demo.review.entity.SOCorrect" >
+    <id column="OCN_ID" property="ocnId" jdbcType="VARCHAR" />
+    <result column="OCN_DATE" property="ocnDate" jdbcType="DATE" />
+    <result column="SIGN_DATE" property="signDate" jdbcType="DATE" />
+    <result column="CASE_INFO_ID" property="caseInfoId" jdbcType="VARCHAR" />
+    <result column="CONTENT_REQUIRE" property="contentRequire" jdbcType="CLOB" />
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
+  </resultMap>
+  <insert id="insert" parameterType="com.activiti.demo.review.entity.SOCorrect">
+    insert into STG_ORDER_CORRECT (OCN_ID, OCN_DATE, SIGN_DATE,
+      CASE_INFO_ID, CONTENT_REQUIRE, CONTENT
+      )
+    values (#{ocnId,jdbcType=VARCHAR}, #{ocnDate,jdbcType=DATE}, #{signDate,jdbcType=DATE},
+      #{caseInfoId,jdbcType=VARCHAR}, #{contentRequire,jdbcType=CLOB}, #{content,jdbcType=CLOB}
+      )
+  </insert>
+  <select id="getList" resultMap="BaseResultMap">
+        select * from STG_ORDER_CORRECT where CASE_INFO_ID=#{caseInfoId}
+    </select>
+  <update id="update" parameterType="com.activiti.demo.review.entity.SOCorrect">
+        update STG_ORDER_CORRECT
+    set OCN_DATE = #{ocnDate,jdbcType=DATE},
+      SIGN_DATE = #{signDate,jdbcType=DATE},
+      CASE_INFO_ID = #{caseInfoId,jdbcType=VARCHAR},
+      CONTENT_REQUIRE = #{contentRequire,jdbcType=CLOB},
+      CONTENT = #{content,jdbcType=CLOB}
+    where OCN_ID = #{ocnId,jdbcType=VARCHAR}
+    </update>
+</mapper>

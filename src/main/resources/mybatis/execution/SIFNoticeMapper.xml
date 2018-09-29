@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.activiti.demo.execution.mapper.SIFNoticeMapper" >
+  <resultMap id="BaseResultMap" type="com.activiti.demo.execution.entity.SIFNotice" >
+    <id column="IFN_ID" property="ifnId" jdbcType="VARCHAR" />
+    <result column="DELAY_DEADLINE" property="delayDeadline" jdbcType="DATE" />
+    <result column="INSTALMENT_NO" property="instalmentNo" jdbcType="VARCHAR" />
+    <result column="INSTALMENTDEADLINE" property="instalmentdeadline" jdbcType="DATE" />
+    <result column="INSTALMENT_AMOUT" property="instalmentAmout" jdbcType="DECIMAL" />
+    <result column="INSTALMENT_UNPAID_AMOUNT" property="instalmentUnpaidAmount" jdbcType="DECIMAL" />
+    <result column="CASE_INFO_ID" property="caseInfoId" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
+  </resultMap>
+  <insert id="insert" parameterType="com.activiti.demo.execution.entity.SIFNotice">
+     insert into STG_INSTALLMENT_FINES_NOTICE (IFN_ID, DELAY_DEADLINE, INSTALMENT_NO,
+      INSTALMENTDEADLINE, INSTALMENT_AMOUT, INSTALMENT_UNPAID_AMOUNT,
+      CASE_INFO_ID, CONTENT)
+    values (#{ifnId,jdbcType=VARCHAR}, #{delayDeadline,jdbcType=DATE}, #{instalmentNo,jdbcType=VARCHAR},
+      #{instalmentdeadline,jdbcType=DATE}, #{instalmentAmout,jdbcType=DECIMAL}, #{instalmentUnpaidAmount,jdbcType=DECIMAL},
+      #{caseInfoId,jdbcType=VARCHAR}, #{content,jdbcType=CLOB})
+  </insert>
+  <select id="getList" resultMap="BaseResultMap">
+        select * from STG_INSTALLMENT_FINES_NOTICE where CASE_INFO_ID=#{caseInfoId}
+    </select>
+  <update id="update" parameterType="com.activiti.demo.execution.entity.SIFNotice">
+    update STG_INSTALLMENT_FINES_NOTICE
+    set DELAY_DEADLINE = #{delayDeadline,jdbcType=DATE},
+      INSTALMENT_NO = #{instalmentNo,jdbcType=VARCHAR},
+      INSTALMENTDEADLINE = #{instalmentdeadline,jdbcType=DATE},
+      INSTALMENT_AMOUT = #{instalmentAmout,jdbcType=DECIMAL},
+      INSTALMENT_UNPAID_AMOUNT = #{instalmentUnpaidAmount,jdbcType=DECIMAL},
+      CASE_INFO_ID = #{caseInfoId,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=CLOB}
+    where IFN_ID = #{ifnId,jdbcType=VARCHAR}
+    </update>
+</mapper>

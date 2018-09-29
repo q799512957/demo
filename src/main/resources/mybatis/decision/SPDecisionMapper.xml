@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.activiti.demo.decision.mapper.SPDecisionMapper" >
+  <resultMap id="BaseResultMap" type="com.activiti.demo.decision.entity.SPDecision" >
+    <id column="PDL_ID" property="pdlId" jdbcType="VARCHAR" />
+    <result column="PUNISH_METHOD" property="punishMethod" jdbcType="VARCHAR" />
+    <result column="BANK_NAME" property="bankName" jdbcType="VARCHAR" />
+    <result column="ACCOUNT_NAME" property="accountName" jdbcType="VARCHAR" />
+    <result column="RECONSIDERATION_ORG" property="reconsiderationOrg" jdbcType="VARCHAR" />
+    <result column="PUNISH_TYPE" property="punishType" jdbcType="VARCHAR" />
+    <result column="PUNISH_DATE" property="punishDate" jdbcType="DATE" />
+    <result column="PUNISH_LETTER_NO" property="punishLetterNo" jdbcType="VARCHAR" />
+    <result column="CASE_INFO_ID" property="caseInfoId" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
+  </resultMap>
+  <insert id="insert" parameterType="com.activiti.demo.decision.entity.SPDecision">
+     insert into STG_PUNISHMENT_DECISION (PDL_ID, PUNISH_METHOD, BANK_NAME,
+      ACCOUNT_NAME, RECONSIDERATION_ORG, PUNISH_TYPE,
+      PUNISH_DATE, PUNISH_LETTER_NO, CASE_INFO_ID,
+      CONTENT)
+    values (#{pdlId,jdbcType=VARCHAR}, #{punishMethod,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR},
+      #{accountName,jdbcType=VARCHAR}, #{reconsiderationOrg,jdbcType=VARCHAR}, #{punishType,jdbcType=VARCHAR},
+      #{punishDate,jdbcType=DATE}, #{punishLetterNo,jdbcType=VARCHAR}, #{caseInfoId,jdbcType=VARCHAR},
+      #{content,jdbcType=CLOB})
+  </insert>
+  <select id="getList" resultMap="BaseResultMap">
+        select * from STG_PUNISHMENT_DECISION where CASE_INFO_ID=#{caseInfoId}
+    </select>
+  <update id="update" parameterType="com.activiti.demo.decision.entity.SPDecision">
+    update STG_PUNISHMENT_DECISION
+    set PUNISH_METHOD = #{punishMethod,jdbcType=VARCHAR},
+      BANK_NAME = #{bankName,jdbcType=VARCHAR},
+      ACCOUNT_NAME = #{accountName,jdbcType=VARCHAR},
+      RECONSIDERATION_ORG = #{reconsiderationOrg,jdbcType=VARCHAR},
+      PUNISH_TYPE = #{punishType,jdbcType=VARCHAR},
+      PUNISH_DATE = #{punishDate,jdbcType=DATE},
+      PUNISH_LETTER_NO = #{punishLetterNo,jdbcType=VARCHAR},
+      CASE_INFO_ID = #{caseInfoId,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=CLOB}
+    where PDL_ID = #{pdlId,jdbcType=VARCHAR}
+    </update>
+</mapper>

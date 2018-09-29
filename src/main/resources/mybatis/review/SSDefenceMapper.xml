@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.activiti.demo.review.mapper.SSDefenceMapper" >
+  <resultMap id="BaseResultMap" type="com.activiti.demo.review.entity.SSDefence" >
+    <id column="SAD_ID" property="sadId" jdbcType="VARCHAR" />
+    <result column="SAD_DATE" property="sadDate" jdbcType="DATE" />
+    <result column="STARTING_TIME" property="startingTime" jdbcType="DATE" />
+    <result column="CLOSING_TIME" property="closingTime" jdbcType="DATE" />
+    <result column="PLACE" property="place" jdbcType="VARCHAR" />
+    <result column="PERSON" property="person" jdbcType="VARCHAR" />
+    <result column="PERSON_GENDER" property="personGender" jdbcType="VARCHAR" />
+    <result column="PERSON_UNIT" property="personUnit" jdbcType="VARCHAR" />
+    <result column="PERSON_POSITION" property="personPosition" jdbcType="VARCHAR" />
+    <result column="PERSON_TEL" property="personTel" jdbcType="VARCHAR" />
+    <result column="PERSON_ADDR" property="personAddr" jdbcType="VARCHAR" />
+    <result column="PERSON_POST_CODE" property="personPostCode" jdbcType="VARCHAR" />
+    <result column="RECORDER" property="recorder" jdbcType="VARCHAR" />
+    <result column="SIGN_DATE" property="signDate" jdbcType="DATE" />
+    <result column="CASE_INFO_ID" property="caseInfoId" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
+    <result column="CONTENT2" property="content2" jdbcType="CLOB" />
+  </resultMap>
+  <insert id="insert" parameterType="com.activiti.demo.review.entity.SSDefence">
+    insert into STG_STATEMENT_DEFENCE (SAD_ID, SAD_DATE, STARTING_TIME,
+      CLOSING_TIME, PLACE, PERSON,
+      PERSON_GENDER, PERSON_UNIT, PERSON_POSITION,
+      PERSON_TEL, PERSON_ADDR, PERSON_POST_CODE,
+      RECORDER, SIGN_DATE, CASE_INFO_ID,
+      CONTENT, CONTENT2)
+    values (#{sadId,jdbcType=VARCHAR}, #{sadDate,jdbcType=DATE}, #{startingTime,jdbcType=DATE},
+      #{closingTime,jdbcType=DATE}, #{place,jdbcType=VARCHAR}, #{person,jdbcType=VARCHAR},
+      #{personGender,jdbcType=VARCHAR}, #{personUnit,jdbcType=VARCHAR}, #{personPosition,jdbcType=VARCHAR},
+      #{personTel,jdbcType=VARCHAR}, #{personAddr,jdbcType=VARCHAR}, #{personPostCode,jdbcType=VARCHAR},
+      #{recorder,jdbcType=VARCHAR}, #{signDate,jdbcType=DATE}, #{caseInfoId,jdbcType=VARCHAR},
+      #{content,jdbcType=CLOB}, #{content2,jdbcType=CLOB})
+  </insert>
+  <select id="getList" resultMap="BaseResultMap">
+        select * from STG_STATEMENT_DEFENCE where CASE_INFO_ID=#{caseInfoId}
+    </select>
+  <update id="update" parameterType="com.activiti.demo.review.entity.SSDefence">
+         update STG_STATEMENT_DEFENCE
+    set SAD_DATE = #{sadDate,jdbcType=DATE},
+      STARTING_TIME = #{startingTime,jdbcType=DATE},
+      CLOSING_TIME = #{closingTime,jdbcType=DATE},
+      PLACE = #{place,jdbcType=VARCHAR},
+      PERSON = #{person,jdbcType=VARCHAR},
+      PERSON_GENDER = #{personGender,jdbcType=VARCHAR},
+      PERSON_UNIT = #{personUnit,jdbcType=VARCHAR},
+      PERSON_POSITION = #{personPosition,jdbcType=VARCHAR},
+      PERSON_TEL = #{personTel,jdbcType=VARCHAR},
+      PERSON_ADDR = #{personAddr,jdbcType=VARCHAR},
+      PERSON_POST_CODE = #{personPostCode,jdbcType=VARCHAR},
+      RECORDER = #{recorder,jdbcType=VARCHAR},
+      SIGN_DATE = #{signDate,jdbcType=DATE},
+      CASE_INFO_ID = #{caseInfoId,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=CLOB},
+      CONTENT2 = #{content2,jdbcType=CLOB}
+    where SAD_ID = #{sadId,jdbcType=VARCHAR}
+    </update>
+</mapper>

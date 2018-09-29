@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.activiti.demo.execution.mapper.SPReportMapper" >
+  <resultMap id="BaseResultMap" type="com.activiti.demo.execution.entity.SPReport" >
+    <id column="PR_ID" property="prId" jdbcType="VARCHAR" />
+    <result column="CASE_INFO_ID" property="caseInfoId" jdbcType="VARCHAR" />
+    <result column="DESPOSAL_RESULT" property="desposalResult" jdbcType="CLOB" />
+    <result column="EXECUT_CONDITION" property="executCondition" jdbcType="CLOB" />
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
+  </resultMap>
+  <insert id="insert" parameterType="com.activiti.demo.execution.entity.SPReport">
+     insert into STG_PENALTY_REPORT (PR_ID, CASE_INFO_ID, DESPOSAL_RESULT,
+      EXECUT_CONDITION, CONTENT)
+    values (#{prId,jdbcType=VARCHAR}, #{caseInfoId,jdbcType=VARCHAR}, #{desposalResult,jdbcType=CLOB},
+      #{executCondition,jdbcType=CLOB}, #{content,jdbcType=CLOB})
+  </insert>
+  <select id="getList" resultMap="BaseResultMap">
+        select * from STG_PENALTY_REPORT where CASE_INFO_ID=#{caseInfoId}
+    </select>
+  <update id="update" parameterType="com.activiti.demo.execution.entity.SPReport">
+    update STG_PENALTY_REPORT
+    set CASE_INFO_ID = #{caseInfoId,jdbcType=VARCHAR},
+      DESPOSAL_RESULT = #{desposalResult,jdbcType=CLOB},
+      EXECUT_CONDITION = #{executCondition,jdbcType=CLOB},
+      CONTENT = #{content,jdbcType=CLOB}
+    where PR_ID = #{prId,jdbcType=VARCHAR}
+    </update>
+</mapper>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.activiti.demo.decision.mapper.SMCDiscussionMapper" >
+  <resultMap id="BaseResultMap" type="com.activiti.demo.decision.entity.SMCDiscussion" >
+    <id column="MCD_ID" property="mcdId" jdbcType="VARCHAR" />
+    <result column="START_TIME" property="startTime" jdbcType="DATE" />
+    <result column="END_TIME" property="endTime" jdbcType="DATE" />
+    <result column="PLACE" property="place" jdbcType="VARCHAR" />
+    <result column="PRESIDER" property="presider" jdbcType="VARCHAR" />
+    <result column="RECORDER" property="recorder" jdbcType="VARCHAR" />
+    <result column="REPORTER" property="reporter" jdbcType="VARCHAR" />
+    <result column="ATTENDEES" property="attendees" jdbcType="VARCHAR" />
+    <result column="CASE_INFO_ID" property="caseInfoId" jdbcType="VARCHAR" />
+    <result column="RECORD" property="record" jdbcType="CLOB" />
+    <result column="CONCLUSION_OPINION" property="conclusionOpinion" jdbcType="CLOB" />
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
+  </resultMap>
+  <insert id="insert" parameterType="com.activiti.demo.decision.entity.SMCDiscussion">
+     insert into STG_MAJOR_CASE_DISCUSSION (MCD_ID, START_TIME, END_TIME,
+      PLACE, PRESIDER, RECORDER,
+      REPORTER, ATTENDEES, CASE_INFO_ID,
+      RECORD, CONCLUSION_OPINION, CONTENT
+      )
+    values (#{mcdId,jdbcType=VARCHAR}, #{startTime,jdbcType=DATE}, #{endTime,jdbcType=DATE},
+      #{place,jdbcType=VARCHAR}, #{presider,jdbcType=VARCHAR}, #{recorder,jdbcType=VARCHAR},
+      #{reporter,jdbcType=VARCHAR}, #{attendees,jdbcType=VARCHAR}, #{caseInfoId,jdbcType=VARCHAR},
+      #{record,jdbcType=CLOB}, #{conclusionOpinion,jdbcType=CLOB}, #{content,jdbcType=CLOB}
+      )
+  </insert>
+  <select id="getList" resultMap="BaseResultMap">
+        select * from STG_MAJOR_CASE_DISCUSSION where CASE_INFO_ID=#{caseInfoId}
+    </select>
+  <update id="update" parameterType="com.activiti.demo.decision.entity.SMCDiscussion">
+    update STG_MAJOR_CASE_DISCUSSION
+    set START_TIME = #{startTime,jdbcType=DATE},
+      END_TIME = #{endTime,jdbcType=DATE},
+      PLACE = #{place,jdbcType=VARCHAR},
+      PRESIDER = #{presider,jdbcType=VARCHAR},
+      RECORDER = #{recorder,jdbcType=VARCHAR},
+      REPORTER = #{reporter,jdbcType=VARCHAR},
+      ATTENDEES = #{attendees,jdbcType=VARCHAR},
+      CASE_INFO_ID = #{caseInfoId,jdbcType=VARCHAR},
+      RECORD = #{record,jdbcType=CLOB},
+      CONCLUSION_OPINION = #{conclusionOpinion,jdbcType=CLOB},
+      CONTENT = #{content,jdbcType=CLOB}
+    where MCD_ID = #{mcdId,jdbcType=VARCHAR}
+    </update>
+</mapper>

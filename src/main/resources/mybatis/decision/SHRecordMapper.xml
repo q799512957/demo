@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.activiti.demo.decision.mapper.SHRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.activiti.demo.decision.entity.SHRecord" >
+    <id column="HR_ID" property="hrId" jdbcType="VARCHAR" />
+    <result column="PRESIDE_ORG" property="presideOrg" jdbcType="VARCHAR" />
+    <result column="START_TIME" property="startTime" jdbcType="DATE" />
+    <result column="END_TIME" property="endTime" jdbcType="DATE" />
+    <result column="THIRD_PARTY" property="thirdParty" jdbcType="VARCHAR" />
+    <result column="THIRD_GENDER" property="thirdGender" jdbcType="VARCHAR" />
+    <result column="THIRD_AGE" property="thirdAge" jdbcType="DECIMAL" />
+    <result column="THIRD_UNIT" property="thirdUnit" jdbcType="VARCHAR" />
+    <result column="THIRD_POSITION" property="thirdPosition" jdbcType="VARCHAR" />
+    <result column="OTHER_PARTICIPANTS" property="otherParticipants" jdbcType="VARCHAR" />
+    <result column="OTHER_GENDER" property="otherGender" jdbcType="VARCHAR" />
+    <result column="OTHER_AGE" property="otherAge" jdbcType="DECIMAL" />
+    <result column="OTHER_UNIT" property="otherUnit" jdbcType="VARCHAR" />
+    <result column="OTHER_POSITION" property="otherPosition" jdbcType="VARCHAR" />
+    <result column="RECORD_SIGN_TIME" property="recordSignTime" jdbcType="DATE" />
+    <result column="RECORD_TIME" property="recordTime" jdbcType="DATE" />
+    <result column="CASE_INFO_ID" property="caseInfoId" jdbcType="VARCHAR" />
+    <result column="RECORD" property="record" jdbcType="CLOB" />
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
+  </resultMap>
+  <insert id="insert" parameterType="com.activiti.demo.decision.entity.SHRecord">
+     insert into STG_HEARING_RECORD (HR_ID, PRESIDE_ORG, START_TIME,
+      END_TIME, THIRD_PARTY, THIRD_GENDER,
+      THIRD_AGE, THIRD_UNIT, THIRD_POSITION,
+      OTHER_PARTICIPANTS, OTHER_GENDER, OTHER_AGE,
+      OTHER_UNIT, OTHER_POSITION, RECORD_SIGN_TIME,
+      RECORD_TIME, CASE_INFO_ID, RECORD,
+      CONTENT)
+    values (#{hrId,jdbcType=VARCHAR}, #{presideOrg,jdbcType=VARCHAR}, #{startTime,jdbcType=DATE},
+      #{endTime,jdbcType=DATE}, #{thirdParty,jdbcType=VARCHAR}, #{thirdGender,jdbcType=VARCHAR},
+      #{thirdAge,jdbcType=DECIMAL}, #{thirdUnit,jdbcType=VARCHAR}, #{thirdPosition,jdbcType=VARCHAR},
+      #{otherParticipants,jdbcType=VARCHAR}, #{otherGender,jdbcType=VARCHAR}, #{otherAge,jdbcType=DECIMAL},
+      #{otherUnit,jdbcType=VARCHAR}, #{otherPosition,jdbcType=VARCHAR}, #{recordSignTime,jdbcType=DATE},
+      #{recordTime,jdbcType=DATE}, #{caseInfoId,jdbcType=VARCHAR}, #{record,jdbcType=CLOB},
+      #{content,jdbcType=CLOB})
+  </insert>
+  <select id="getList" resultMap="BaseResultMap">
+        select * from STG_HEARING_RECORD where CASE_INFO_ID=#{caseInfoId}
+    </select>
+  <update id="update" parameterType="com.activiti.demo.decision.entity.SHRecord">
+     update STG_HEARING_RECORD
+    set PRESIDE_ORG = #{presideOrg,jdbcType=VARCHAR},
+      START_TIME = #{startTime,jdbcType=DATE},
+      END_TIME = #{endTime,jdbcType=DATE},
+      THIRD_PARTY = #{thirdParty,jdbcType=VARCHAR},
+      THIRD_GENDER = #{thirdGender,jdbcType=VARCHAR},
+      THIRD_AGE = #{thirdAge,jdbcType=DECIMAL},
+      THIRD_UNIT = #{thirdUnit,jdbcType=VARCHAR},
+      THIRD_POSITION = #{thirdPosition,jdbcType=VARCHAR},
+      OTHER_PARTICIPANTS = #{otherParticipants,jdbcType=VARCHAR},
+      OTHER_GENDER = #{otherGender,jdbcType=VARCHAR},
+      OTHER_AGE = #{otherAge,jdbcType=DECIMAL},
+      OTHER_UNIT = #{otherUnit,jdbcType=VARCHAR},
+      OTHER_POSITION = #{otherPosition,jdbcType=VARCHAR},
+      RECORD_SIGN_TIME = #{recordSignTime,jdbcType=DATE},
+      RECORD_TIME = #{recordTime,jdbcType=DATE},
+      CASE_INFO_ID = #{caseInfoId,jdbcType=VARCHAR},
+      RECORD = #{record,jdbcType=CLOB},
+      CONTENT = #{content,jdbcType=CLOB}
+    where HR_ID = #{hrId,jdbcType=VARCHAR}
+    </update>
+</mapper>

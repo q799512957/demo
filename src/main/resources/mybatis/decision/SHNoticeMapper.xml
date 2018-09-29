@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.activiti.demo.decision.mapper.SHNoticeMapper" >
+  <resultMap id="BaseResultMap" type="com.activiti.demo.decision.entity.SHNotice" >
+    <id column="HN_ID" property="hnId" jdbcType="VARCHAR" />
+    <result column="TIME" property="time" jdbcType="DATE" />
+    <result column="PLACE" property="place" jdbcType="VARCHAR" />
+    <result column="PRESIDER_NAME" property="presiderName" jdbcType="VARCHAR" />
+    <result column="PRESIDER_POSITION" property="presiderPosition" jdbcType="VARCHAR" />
+    <result column="OFFICER_NAME" property="officerName" jdbcType="VARCHAR" />
+    <result column="OFFICER_POSITION" property="officerPosition" jdbcType="VARCHAR" />
+    <result column="SECRETARY_NAME" property="secretaryName" jdbcType="VARCHAR" />
+    <result column="SECRETARY_POSITION" property="secretaryPosition" jdbcType="VARCHAR" />
+    <result column="NOTICE_DATE" property="noticeDate" jdbcType="DATE" />
+    <result column="CASE_INFO_ID" property="caseInfoId" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
+  </resultMap>
+  <insert id="insert" parameterType="com.activiti.demo.decision.entity.SHNotice">
+     insert into STG_HEARING_NOTICE (HN_ID, TIME, PLACE,
+      PRESIDER_NAME, PRESIDER_POSITION, OFFICER_NAME,
+      OFFICER_POSITION, SECRETARY_NAME, SECRETARY_POSITION,
+      NOTICE_DATE, CASE_INFO_ID, CONTENT
+      )
+    values (#{hnId,jdbcType=VARCHAR}, #{time,jdbcType=DATE}, #{place,jdbcType=VARCHAR},
+      #{presiderName,jdbcType=VARCHAR}, #{presiderPosition,jdbcType=VARCHAR}, #{officerName,jdbcType=VARCHAR},
+      #{officerPosition,jdbcType=VARCHAR}, #{secretaryName,jdbcType=VARCHAR}, #{secretaryPosition,jdbcType=VARCHAR},
+      #{noticeDate,jdbcType=DATE}, #{caseInfoId,jdbcType=VARCHAR}, #{content,jdbcType=CLOB}
+      )
+  </insert>
+  <select id="getList" resultMap="BaseResultMap">
+        select * from STG_HEARING_NOTICE where CASE_INFO_ID=#{caseInfoId}
+    </select>
+  <update id="update" parameterType="com.activiti.demo.decision.entity.SHNotice">
+         update STG_HEARING_NOTICE
+    set TIME = #{time,jdbcType=DATE},
+      PLACE = #{place,jdbcType=VARCHAR},
+      PRESIDER_NAME = #{presiderName,jdbcType=VARCHAR},
+      PRESIDER_POSITION = #{presiderPosition,jdbcType=VARCHAR},
+      OFFICER_NAME = #{officerName,jdbcType=VARCHAR},
+      OFFICER_POSITION = #{officerPosition,jdbcType=VARCHAR},
+      SECRETARY_NAME = #{secretaryName,jdbcType=VARCHAR},
+      SECRETARY_POSITION = #{secretaryPosition,jdbcType=VARCHAR},
+      NOTICE_DATE = #{noticeDate,jdbcType=DATE},
+      CASE_INFO_ID = #{caseInfoId,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=CLOB}
+    where HN_ID = #{hnId,jdbcType=VARCHAR}
+    </update>
+</mapper>

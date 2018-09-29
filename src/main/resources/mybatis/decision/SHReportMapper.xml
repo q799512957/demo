@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.activiti.demo.decision.mapper.SHReportMapper" >
+  <resultMap id="BaseResultMap" type="com.activiti.demo.decision.entity.SHReport" >
+    <id column="HR_ID" property="hrId" jdbcType="VARCHAR" />
+    <result column="PRESIDER_SIGN_TIME" property="presiderSignTime" jdbcType="DATE" />
+    <result column="ENFORCE_ORG_SIGN_DATE" property="enforceOrgSignDate" jdbcType="DATE" />
+    <result column="CASE_INFO_ID" property="caseInfoId" jdbcType="VARCHAR" />
+    <result column="BASIC_INFO" property="basicInfo" jdbcType="CLOB" />
+    <result column="CONCLUSION" property="conclusion" jdbcType="CLOB" />
+    <result column="DISPOSAL_SUGGESTION" property="disposalSuggestion" jdbcType="CLOB" />
+    <result column="ENFORCE_ORG_OP" property="enforceOrgOp" jdbcType="CLOB" />
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
+  </resultMap>
+  <insert id="insert" parameterType="com.activiti.demo.decision.entity.SHReport">
+     insert into STG_HEARING_REPORT (HR_ID, PRESIDER_SIGN_TIME, ENFORCE_ORG_SIGN_DATE,
+      CASE_INFO_ID, BASIC_INFO, CONCLUSION,
+      DISPOSAL_SUGGESTION, ENFORCE_ORG_OP, CONTENT
+      )
+    values (#{hrId,jdbcType=VARCHAR}, #{presiderSignTime,jdbcType=DATE}, #{enforceOrgSignDate,jdbcType=DATE},
+      #{caseInfoId,jdbcType=VARCHAR}, #{basicInfo,jdbcType=CLOB}, #{conclusion,jdbcType=CLOB},
+      #{disposalSuggestion,jdbcType=CLOB}, #{enforceOrgOp,jdbcType=CLOB}, #{content,jdbcType=CLOB}
+      )
+  </insert>
+  <select id="getList" resultMap="BaseResultMap">
+        select * from STG_HEARING_REPORT where CASE_INFO_ID=#{caseInfoId}
+    </select>
+  <update id="update" parameterType="com.activiti.demo.decision.entity.SHReport">
+    update STG_HEARING_REPORT
+    set PRESIDER_SIGN_TIME = #{presiderSignTime,jdbcType=DATE},
+      ENFORCE_ORG_SIGN_DATE = #{enforceOrgSignDate,jdbcType=DATE},
+      CASE_INFO_ID = #{caseInfoId,jdbcType=VARCHAR},
+      BASIC_INFO = #{basicInfo,jdbcType=CLOB},
+      CONCLUSION = #{conclusion,jdbcType=CLOB},
+      DISPOSAL_SUGGESTION = #{disposalSuggestion,jdbcType=CLOB},
+      ENFORCE_ORG_OP = #{enforceOrgOp,jdbcType=CLOB},
+      CONTENT = #{content,jdbcType=CLOB}
+    where HR_ID = #{hrId,jdbcType=VARCHAR}
+    </update>
+</mapper>

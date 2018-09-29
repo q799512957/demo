@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.activiti.demo.review.mapper.SAApplicationMapper">
+    <insert id="insert" parameterType="com.activiti.demo.review.entity.SAApplication">
+        insert into STG_AVOIDANACE_APPLICATION (AA_ID, APPLICATION, APP_ADDRESS, APP_TEL, RESPONDENT, RES_UNIT, RES_POSITION, RES_POSITION_CODE, MATTER_AND_REASON, LAW_ENFORCE_ORG, APP_DATE, DECISION_CODE, CASE_INFO_ID, CONTENT)
+        values (#{aaId}, #{application}, #{appAddress}, #{appTel}, #{respondent}, #{resUnit}, #{resPosition}, #{resPositionCode}, #{matterAndReason}, #{lawEnforceOrg}, #{appDate}, #{decisionCode}, #{caseInfoId}, #{content})
+    </insert>
+    <resultMap id="SAApplicationMap" type="com.activiti.demo.review.entity.SAApplication">
+        <id column="AA_ID" jdbcType="VARCHAR" property="aaId"/>
+        <result column="APPLICATION" jdbcType="VARCHAR" property="application"/>
+        <result column="APP_ADDRESS" jdbcType="VARCHAR" property="appAddress"/>
+        <result column="APP_TEL" jdbcType="VARCHAR" property="appTel"/>
+        <result column="RESPONDENT" jdbcType="VARCHAR" property="respondent"/>
+        <result column="RES_UNIT" jdbcType="VARCHAR" property="resUnit"/>
+        <result column="RES_POSITION" jdbcType="VARCHAR" property="resPosition"/>
+        <result column="RES_POSITION_CODE" jdbcType="VARCHAR" property="resPositionCode"/>
+        <result column="MATTER_AND_REASON" jdbcType="CLOB" property="matterAndReason" javaType = "java.lang.String"/>
+        <result column="LAW_ENFORCE_ORG" jdbcType="VARCHAR" property="lawEnforceOrg"/>
+        <result column="APP_DATE" jdbcType="DATE" property="appDate"/>
+        <result column="DECISION_CODE" jdbcType="VARCHAR" property="decisionCode"/>
+        <result column="CASE_INFO_ID" jdbcType="VARCHAR" property="caseInfoId"/>
+        <result column="CONTENT" jdbcType="CLOB" property="content" javaType = "java.lang.String"/>
+    </resultMap>
+    <select id="getList" resultMap="SAApplicationMap">
+        select * from STG_AVOIDANACE_APPLICATION where CASE_INFO_ID=#{caseInfoId}
+    </select>
+    <update id="update">
+        update STG_AVOIDANACE_APPLICATION set APPLICATION=#{application}, APP_ADDRESS=#{appAddress}, APP_TEL= #{appTel}, RESPONDENT=#{respondent}, RES_UNIT=#{resUnit}, RES_POSITION=#{resPosition},
+         RES_POSITION_CODE=#{resPositionCode}, MATTER_AND_REASON=#{matterAndReason}, LAW_ENFORCE_ORG=#{lawEnforceOrg}, APP_DATE=#{appDate}, DECISION_CODE=#{decisionCode}, CASE_INFO_ID=#{caseInfoId}, CONTENT=#{content}
+        where AA_ID = #{aaId}
+    </update>
+</mapper>

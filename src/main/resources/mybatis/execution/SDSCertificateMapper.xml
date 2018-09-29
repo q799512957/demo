@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.activiti.demo.execution.mapper.SDSCertificateMapper" >
+  <resultMap id="BaseResultMap" type="com.activiti.demo.execution.entity.SDSCertificate" >
+    <id column="DSC_ID" property="dscId" jdbcType="VARCHAR" />
+    <result column="CHOOSE_DOC_UNIT" property="chooseDocUnit" jdbcType="VARCHAR" />
+    <result column="CHOOSE_DOC_PERSON" property="chooseDocPerson" jdbcType="VARCHAR" />
+    <result column="COLL_AGENT" property="collAgent" jdbcType="VARCHAR" />
+    <result column="SERV_PROOF_DATE" property="servProofDate" jdbcType="DATE" />
+    <result column="DOCUMENT_NAME" property="documentName" jdbcType="VARCHAR" />
+    <result column="DOCUMENT_NO" property="documentNo" jdbcType="VARCHAR" />
+    <result column="SERV_DATE" property="servDate" jdbcType="DATE" />
+    <result column="SERV_PLACE" property="servPlace" jdbcType="VARCHAR" />
+    <result column="SERV_TYPE" property="servType" jdbcType="VARCHAR" />
+    <result column="SERV_PERSON" property="servPerson" jdbcType="VARCHAR" />
+    <result column="CASE_INFO_ID" property="caseInfoId" jdbcType="VARCHAR" />
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
+  </resultMap>
+  <insert id="insert" parameterType="com.activiti.demo.execution.entity.SDSCertificate">
+     insert into STG_DOC_SENT_CERTIFICATE (DSC_ID, CHOOSE_DOC_UNIT, CHOOSE_DOC_PERSON,
+      COLL_AGENT, SERV_PROOF_DATE, DOCUMENT_NAME,
+      DOCUMENT_NO, SERV_DATE, SERV_PLACE,
+      SERV_TYPE, SERV_PERSON, CASE_INFO_ID,
+      CONTENT)
+    values (#{dscId,jdbcType=VARCHAR}, #{chooseDocUnit,jdbcType=VARCHAR}, #{chooseDocPerson,jdbcType=VARCHAR},
+      #{collAgent,jdbcType=VARCHAR}, #{servProofDate,jdbcType=DATE}, #{documentName,jdbcType=VARCHAR},
+      #{documentNo,jdbcType=VARCHAR}, #{servDate,jdbcType=DATE}, #{servPlace,jdbcType=VARCHAR},
+      #{servType,jdbcType=VARCHAR}, #{servPerson,jdbcType=VARCHAR}, #{caseInfoId,jdbcType=VARCHAR},
+      #{content,jdbcType=CLOB})
+  </insert>
+  <select id="getList" resultMap="BaseResultMap">
+        select * from STG_DOC_SENT_CERTIFICATE where CASE_INFO_ID=#{caseInfoId}
+    </select>
+  <update id="update" parameterType="com.activiti.demo.execution.entity.SDSCertificate">
+    update STG_DOC_SENT_CERTIFICATE
+    set CHOOSE_DOC_UNIT = #{chooseDocUnit,jdbcType=VARCHAR},
+      CHOOSE_DOC_PERSON = #{chooseDocPerson,jdbcType=VARCHAR},
+      COLL_AGENT = #{collAgent,jdbcType=VARCHAR},
+      SERV_PROOF_DATE = #{servProofDate,jdbcType=DATE},
+      DOCUMENT_NAME = #{documentName,jdbcType=VARCHAR},
+      DOCUMENT_NO = #{documentNo,jdbcType=VARCHAR},
+      SERV_DATE = #{servDate,jdbcType=DATE},
+      SERV_PLACE = #{servPlace,jdbcType=VARCHAR},
+      SERV_TYPE = #{servType,jdbcType=VARCHAR},
+      SERV_PERSON = #{servPerson,jdbcType=VARCHAR},
+      CASE_INFO_ID = #{caseInfoId,jdbcType=VARCHAR},
+      CONTENT = #{content,jdbcType=CLOB}
+    where DSC_ID = #{dscId,jdbcType=VARCHAR}
+    </update>
+</mapper>

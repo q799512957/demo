@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.activiti.demo.execution.mapper.SIDPayMapper" >
+  <resultMap id="BaseResultMap" type="com.activiti.demo.execution.entity.SIDPay" >
+    <id column="IDPA_ID" property="idpaId" jdbcType="VARCHAR" />
+    <result column="IDPA_DATE" property="idpaDate" jdbcType="DATE" />
+    <result column="ENFORCER_SIGN_TIME" property="enforcerSignTime" jdbcType="DATE" />
+    <result column="ENFORCE_ORG_EXAM_TIME" property="enforceOrgExamTime" jdbcType="DATE" />
+    <result column="CASE_INFO_ID" property="caseInfoId" jdbcType="VARCHAR" />
+    <result column="REASON" property="reason" jdbcType="CLOB" />
+    <result column="ENFORCER_OPINION" property="enforcerOpinion" jdbcType="CLOB" />
+    <result column="ENFORCE_ORG_OPINION" property="enforceOrgOpinion" jdbcType="CLOB" />
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
+  </resultMap>
+  <insert id="insert" parameterType="com.activiti.demo.execution.entity.SIDPay">
+     insert into STG_INSTALMENT_DEFER_PAY (IDPA_DATE, ENFORCER_SIGN_TIME, ENFORCE_ORG_EXAM_TIME,
+      CASE_INFO_ID, REASON, ENFORCER_OPINION,
+      ENFORCE_ORG_OPINION, CONTENT, IDPA_ID
+      )
+    values (#{idpaDate,jdbcType=DATE}, #{enforcerSignTime,jdbcType=DATE}, #{enforceOrgExamTime,jdbcType=DATE},
+     #{caseInfoId,jdbcType=VARCHAR}, #{reason,jdbcType=CLOB}, #{enforcerOpinion,jdbcType=CLOB},
+      #{enforceOrgOpinion,jdbcType=CLOB},#{content,jdbcType=CLOB}, #{idpaId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <select id="getList" resultMap="BaseResultMap">
+        select * from STG_INSTALMENT_DEFER_PAY where CASE_INFO_ID=#{caseInfoId}
+    </select>
+  <update id="update" parameterType="com.activiti.demo.execution.entity.SIDPay">
+    update STG_INSTALMENT_DEFER_PAY
+    set IDPA_DATE = #{idpaDate,jdbcType=DATE},
+      ENFORCER_SIGN_TIME = #{enforcerSignTime,jdbcType=DATE},
+      ENFORCE_ORG_EXAM_TIME = #{enforceOrgExamTime,jdbcType=DATE},
+      CASE_INFO_ID = #{caseInfoId,jdbcType=VARCHAR},
+      REASON = #{reason,jdbcType=CLOB},
+      ENFORCER_OPINION = #{enforcerOpinion,jdbcType=CLOB},
+      ENFORCE_ORG_OPINION = #{enforceOrgOpinion,jdbcType=CLOB},
+      CONTENT = #{content,jdbcType=CLOB}
+    where IDPA_ID = #{idpaId,jdbcType=VARCHAR}
+    </update>
+</mapper>

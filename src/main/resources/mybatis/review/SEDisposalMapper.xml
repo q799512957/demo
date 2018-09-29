@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.activiti.demo.review.mapper.SEDisposalMapper">
+  <insert id="insert" parameterType="com.activiti.demo.review.entity.SEDisposal">
+        insert into STG_EVIDENCE_DISPOSAL (EDD_ID, DECISION_DATE, CASE_INFO_ID,
+      DECISION, CONTENT)
+    values (#{eddId,jdbcType=VARCHAR}, #{decisionDate,jdbcType=DATE}, #{caseInfoId,jdbcType=VARCHAR},
+      #{decision,jdbcType=CLOB}, #{content,jdbcType=CLOB})
+    </insert>
+  <resultMap id="BaseResultMap" type="com.activiti.demo.review.entity.SEDisposal">
+    <id column="EDD_ID" jdbcType="VARCHAR" property="eddId" />
+    <result column="DECISION_DATE" jdbcType="DATE" property="decisionDate" />
+    <result column="CASE_INFO_ID" jdbcType="VARCHAR" property="caseInfoId" />
+    <result column="DECISION" jdbcType="CLOB" property="decision" />
+    <result column="CONTENT" jdbcType="CLOB" property="content" />
+  </resultMap>
+  <select id="getList" resultMap="BaseResultMap">
+        select * from STG_EVIDENCE_DISPOSAL where CASE_INFO_ID=#{caseInfoId}
+    </select>
+  <update id="update" parameterType="com.activiti.demo.review.entity.SEDisposal">
+         update STG_EVIDENCE_DISPOSAL
+    set DECISION_DATE = #{decisionDate,jdbcType=DATE},
+      CASE_INFO_ID = #{caseInfoId,jdbcType=VARCHAR},
+      DECISION = #{decision,jdbcType=CLOB},
+      CONTENT = #{content,jdbcType=CLOB}
+    where EDD_ID = #{eddId,jdbcType=VARCHAR}
+    </update>
+</mapper>

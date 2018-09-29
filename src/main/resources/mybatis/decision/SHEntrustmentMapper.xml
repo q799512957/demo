@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.activiti.demo.decision.mapper.SHEntrustmentMapper" >
+  <resultMap id="BaseResultMap" type="com.activiti.demo.decision.entity.SHEntrustment" >
+    <id column="HE_ID" property="heId" jdbcType="VARCHAR" />
+    <result column="CONSIGNER_NAME" property="consignerName" jdbcType="VARCHAR" />
+    <result column="CONSIGNER_GENDER" property="consignerGender" jdbcType="VARCHAR" />
+    <result column="CONSIGNER_POSITION" property="consignerPosition" jdbcType="VARCHAR" />
+    <result column="CONSIGNER_UNIT" property="consignerUnit" jdbcType="VARCHAR" />
+    <result column="CONSIGNER_TEL" property="consignerTel" jdbcType="VARCHAR" />
+    <result column="CONSIGNER_ADDR" property="consignerAddr" jdbcType="VARCHAR" />
+    <result column="CONSIGNER_POST_CODE" property="consignerPostCode" jdbcType="VARCHAR" />
+    <result column="AGENT_NAME" property="agentName" jdbcType="VARCHAR" />
+    <result column="AGENT_GENDER" property="agentGender" jdbcType="VARCHAR" />
+    <result column="AGENT_POSITION" property="agentPosition" jdbcType="VARCHAR" />
+    <result column="AGENT_UNIT" property="agentUnit" jdbcType="VARCHAR" />
+    <result column="AGENT_TEL" property="agentTel" jdbcType="VARCHAR" />
+    <result column="AGENT_ADDR" property="agentAddr" jdbcType="VARCHAR" />
+    <result column="AGENT_POST_CODE" property="agentPostCode" jdbcType="VARCHAR" />
+    <result column="CONSIGNER_SIGN_DATE" property="consignerSignDate" jdbcType="DATE" />
+    <result column="AGENT_SIGN_DATE" property="agentSignDate" jdbcType="DATE" />
+    <result column="CASE_INFO_ID" property="caseInfoId" jdbcType="VARCHAR" />
+    <result column="AGENT_AUTHORITY" property="agentAuthority" jdbcType="CLOB" />
+    <result column="CONTENT" property="content" jdbcType="CLOB" />
+  </resultMap>
+  <insert id="insert" parameterType="com.activiti.demo.decision.entity.SHEntrustment">
+     insert into STG_HEARING_ENTRUSTMENT (HE_ID, CONSIGNER_NAME, CONSIGNER_GENDER,
+      CONSIGNER_POSITION, CONSIGNER_UNIT, CONSIGNER_TEL,
+      CONSIGNER_ADDR, CONSIGNER_POST_CODE, AGENT_NAME,
+      AGENT_GENDER, AGENT_POSITION, AGENT_UNIT,
+      AGENT_TEL, AGENT_ADDR, AGENT_POST_CODE,
+      CONSIGNER_SIGN_DATE, AGENT_SIGN_DATE, CASE_INFO_ID,
+      AGENT_AUTHORITY, CONTENT)
+    values (#{heId,jdbcType=VARCHAR}, #{consignerName,jdbcType=VARCHAR}, #{consignerGender,jdbcType=VARCHAR},
+      #{consignerPosition,jdbcType=VARCHAR}, #{consignerUnit,jdbcType=VARCHAR}, #{consignerTel,jdbcType=VARCHAR},
+      #{consignerAddr,jdbcType=VARCHAR}, #{consignerPostCode,jdbcType=VARCHAR}, #{agentName,jdbcType=VARCHAR},
+      #{agentGender,jdbcType=VARCHAR}, #{agentPosition,jdbcType=VARCHAR}, #{agentUnit,jdbcType=VARCHAR},
+      #{agentTel,jdbcType=VARCHAR}, #{agentAddr,jdbcType=VARCHAR}, #{agentPostCode,jdbcType=VARCHAR},
+      #{consignerSignDate,jdbcType=DATE}, #{agentSignDate,jdbcType=DATE}, #{caseInfoId,jdbcType=VARCHAR},
+      #{agentAuthority,jdbcType=CLOB}, #{content,jdbcType=CLOB})
+  </insert>
+  <select id="getList" resultMap="BaseResultMap">
+        select * from STG_HEARING_ENTRUSTMENT where CASE_INFO_ID=#{caseInfoId}
+    </select>
+  <update id="update" parameterType="com.activiti.demo.decision.entity.SHEntrustment">
+    update STG_HEARING_ENTRUSTMENT
+    set CONSIGNER_NAME = #{consignerName,jdbcType=VARCHAR},
+      CONSIGNER_GENDER = #{consignerGender,jdbcType=VARCHAR},
+      CONSIGNER_POSITION = #{consignerPosition,jdbcType=VARCHAR},
+      CONSIGNER_UNIT = #{consignerUnit,jdbcType=VARCHAR},
+      CONSIGNER_TEL = #{consignerTel,jdbcType=VARCHAR},
+      CONSIGNER_ADDR = #{consignerAddr,jdbcType=VARCHAR},
+      CONSIGNER_POST_CODE = #{consignerPostCode,jdbcType=VARCHAR},
+      AGENT_NAME = #{agentName,jdbcType=VARCHAR},
+      AGENT_GENDER = #{agentGender,jdbcType=VARCHAR},
+      AGENT_POSITION = #{agentPosition,jdbcType=VARCHAR},
+      AGENT_UNIT = #{agentUnit,jdbcType=VARCHAR},
+      AGENT_TEL = #{agentTel,jdbcType=VARCHAR},
+      AGENT_ADDR = #{agentAddr,jdbcType=VARCHAR},
+      AGENT_POST_CODE = #{agentPostCode,jdbcType=VARCHAR},
+      CONSIGNER_SIGN_DATE = #{consignerSignDate,jdbcType=DATE},
+      AGENT_SIGN_DATE = #{agentSignDate,jdbcType=DATE},
+      CASE_INFO_ID = #{caseInfoId,jdbcType=VARCHAR},
+      AGENT_AUTHORITY = #{agentAuthority,jdbcType=CLOB},
+      CONTENT = #{content,jdbcType=CLOB}
+    where HE_ID = #{heId,jdbcType=VARCHAR}
+    </update>
+</mapper>
